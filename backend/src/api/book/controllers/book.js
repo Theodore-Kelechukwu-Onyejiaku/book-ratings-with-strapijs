@@ -52,8 +52,10 @@ module.exports = createCoreController('api::book.book', ({ strapi }) => ({
 
     async create(ctx) {
         const { data } = ctx.request.body;
+        // save creator field from middleware
         data.creator = ctx.username
 
+        // create book
         let entity = await strapi.service('api::book.book').create({ data });
         const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
         return this.transformResponse(sanitizedEntity)
@@ -70,11 +72,12 @@ module.exports = createCoreController('api::book.book', ({ strapi }) => ({
             return ctx.badRequest("book does not exist", { details: "This book was not found" })
         }
 
-        // if book belongs to this user
+        // if book belongs to this user from the middleware
         if (book.creator !== ctx.username) {
             return ctx.forbidden("You cannot update this book", { details: "This book does not belong to you" })
         }
 
+        // update book
         let entity = await strapi.service('api::book.book').update(id, ctx.request.body)
         const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
         return this.transformResponse(sanitizedEntity)
@@ -92,6 +95,7 @@ module.exports = createCoreController('api::book.book', ({ strapi }) => ({
             return ctx.badRequest("book does not exist", { details: "This book was not found" })
         }
 
+        // delete book
         let entity = await strapi.service('api::book.book').delete(id)
         const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
         return this.transformResponse(sanitizedEntity)

@@ -11,6 +11,7 @@ module.exports = createCoreRouter('api::book.book', {
         create: {
             middlewares: [
                 (ctx, next) => {
+                    // check if user is authenticated and save username to context
                     let user = ctx.state.user;
                     if (user) ctx.username = ctx.state.user.username
                     return next();
@@ -20,6 +21,7 @@ module.exports = createCoreRouter('api::book.book', {
         update: {
             middlewares: [
                 (ctx, next) => {
+                    // check if user is authenticated and save username to context
                     let user = ctx.state.user;
                     if (user) ctx.username = ctx.state.user.username
                     return next()
@@ -27,18 +29,8 @@ module.exports = createCoreRouter('api::book.book', {
             ]
         },
         delete: {
+            // register policy to check if user is admin
             policies: ["is-admin"]
-            // middlewares: [
-            //     (ctx, next) => {
-            //         console.log("omo i be middlewaare they no call me ooo")
-            //         let user = ctx.state.user;
-            //         // check if user is admin
-            //         if (!user.admin) {
-            //             return ctx.forbidden("You can not delete this book as you are not an admin!")
-            //         }
-            //         return next()
-            //     }
-            // ]
         },
     }
 });
