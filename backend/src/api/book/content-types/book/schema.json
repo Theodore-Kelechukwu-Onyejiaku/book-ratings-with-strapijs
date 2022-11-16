@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "books",
+  "info": {
+    "singularName": "book",
+    "pluralName": "books",
+    "displayName": "Book",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "info": {
+      "type": "text"
+    },
+    "creator": {
+      "type": "string",
+      "required": true
+    },
+    "imageUrl": {
+      "type": "string",
+      "required": true
+    },
+    "imageId": {
+      "type": "string",
+      "required": true
+    },
+    "likes": {
+      "type": "json"
+    }
+  }
+}
