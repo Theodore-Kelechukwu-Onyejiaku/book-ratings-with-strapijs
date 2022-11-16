@@ -1,26 +1,26 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content {
+    margin-top: 92px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.heart-icon {
+    height: 50px;
+    width: 100px;
+    background: url("/heart.png");
+    background-position: left;
+    cursor: pointer;
+    z-index: 1000;
 }
 
-* {
-  box-sizing: border-box;
+.heart-icon.liked {
+    animation: like-anim 0.7s steps(28) forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+@keyframes like-anim {
+    to {
+        background-position: right;
+    }
 }
