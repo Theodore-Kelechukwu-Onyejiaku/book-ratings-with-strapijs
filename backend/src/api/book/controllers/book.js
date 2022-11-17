@@ -84,7 +84,6 @@ module.exports = createCoreController('api::book.book', ({ strapi }) => ({
     },
 
     async delete(ctx) {
-        console.log("omo they no call me oo")
         let { id } = ctx.params;
 
         // get the book 

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import 'react-quill/dist/quill.bubble.css';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -11,6 +12,7 @@ import AppContext from '../utils/AppContext';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function SingleBook({ book, reviews }) {
+  const router = useRouter();
   const { authUser } = useContext(AppContext);
   const successNotification = () => toast.success('Book deleted successfully!');
   const errorNotification = (error) => toast.error(error);
@@ -25,6 +27,7 @@ export default function SingleBook({ book, reviews }) {
           },
         });
         successNotification();
+        router.push('/');
       } catch (error) {
         errorNotification(error.response.data.error.message);
       }
@@ -44,7 +47,7 @@ export default function SingleBook({ book, reviews }) {
           {reviews.reviewsCount}
           {' '}
           reviews)
-          {(book?.attributes?.creator === authUser?.username || authUser?.admin)
+          {(book?.attributes?.creator === authUser?.username || authUser?.isAdmin)
             && (
               <>
                 <Link href={`/edit-book?book=${book.id}`}><button type="button" className="ml-5 p-1 rounded bg-green-500 text-white w-14 shadow">Edit</button></Link>

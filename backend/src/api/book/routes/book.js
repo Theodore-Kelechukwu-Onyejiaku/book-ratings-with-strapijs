@@ -13,7 +13,7 @@ module.exports = createCoreRouter('api::book.book', {
                 (ctx, next) => {
                     // check if user is authenticated and save username to context
                     let user = ctx.state.user;
-                    if (user) ctx.username = ctx.state.user.username
+                    if (user) ctx.username = ctx.state.user.username;
                     return next();
                 }
             ]
@@ -23,7 +23,7 @@ module.exports = createCoreRouter('api::book.book', {
                 (ctx, next) => {
                     // check if user is authenticated and save username to context
                     let user = ctx.state.user;
-                    if (user) ctx.username = ctx.state.user.username
+                    if (user) ctx.username = ctx.state.user.username;
                     return next()
                 }
             ]

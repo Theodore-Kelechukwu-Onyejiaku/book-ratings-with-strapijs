@@ -63,7 +63,7 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "admin": {
+    "isAdmin": {
       "type": "boolean",
       "default": false
     }
